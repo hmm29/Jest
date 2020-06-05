@@ -1,7 +1,8 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import * as React from 'react';
 
-import TabBarIcon from '../components/TabBarIcon';
+import FontAwesomeIcon from '../components/FontAwesomeIcon';
+import EntypoIcon from '../components/EntypoIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 
@@ -17,19 +18,19 @@ export default function BottomTabNavigator({ navigation, route }) {
   return (
     <BottomTab.Navigator initialRouteName={INITIAL_ROUTE_NAME}>
       <BottomTab.Screen
-        name="Home"
+        name="Jests"
         component={HomeScreen}
         options={{
-          title: 'Get Started',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-code-working" />,
+          title: 'Jests',
+          tabBarIcon: ({ focused }) => <FontAwesomeIcon focused={focused} name="grin-tongue-wink" />,
         }}
       />
       <BottomTab.Screen
-        name="Links"
+        name="Chats"
         component={LinksScreen}
         options={{
-          title: 'Resources',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-book" />,
+          title: 'Chats',
+          tabBarIcon: ({ focused }) => <EntypoIcon focused={focused} name="chat" />,
         }}
       />
     </BottomTab.Navigator>
@@ -41,8 +42,8 @@ function getHeaderTitle(route) {
 
   switch (routeName) {
     case 'Home':
-      return 'How to get started';
+      return 'Welcome to Jest';
     case 'Links':
-      return 'Links to learn more';
+      return 'Your Chats';
   }
 }

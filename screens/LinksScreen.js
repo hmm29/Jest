@@ -4,28 +4,11 @@ import * as React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
 
+import TicTacToe from '../components/games/TicTacToe';
+
 export default function LinksScreen() {
   return (
-    <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-      <OptionButton
-        icon="md-school"
-        label="Read the Expo documentation"
-        onPress={() => WebBrowser.openBrowserAsync('https://docs.expo.io')}
-      />
-
-      <OptionButton
-        icon="md-compass"
-        label="Read the React Navigation documentation"
-        onPress={() => WebBrowser.openBrowserAsync('https://reactnavigation.org')}
-      />
-
-      <OptionButton
-        icon="ios-chatboxes"
-        label="Ask a question on the forums"
-        onPress={() => WebBrowser.openBrowserAsync('https://forums.expo.io')}
-        isLastOption
-      />
-    </ScrollView>
+    <TicTacToe />
   );
 }
 
@@ -42,6 +25,20 @@ function OptionButton({ icon, label, onPress, isLastOption }) {
       </View>
     </RectButton>
   );
+}
+
+function ChatListItem({ username, userImgUri, message, lastSeen, hasUnreadMessage }) {
+  return (
+    <TouchableOpacity style={styles} onPress={() => {}}>
+      {/*<Image style={styles} source={ { uri: userImgUri }} /> */}
+      <View>
+        <Text>{username}</Text>
+        <Text>{lastSeen}</Text>
+      </View>
+      <Text>{getPreview(message)}</Text>
+      {hasUnreadMessage ? <View/> : null}
+    </TouchableOpacity>
+  )
 }
 
 const styles = StyleSheet.create({
