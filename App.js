@@ -1,14 +1,10 @@
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 
 import useCachedResources from './hooks/useCachedResources';
-import BottomTabNavigator from './navigation/BottomTabNavigator';
 import LinkingConfiguration from './navigation/LinkingConfiguration';
-import LoginScreen from './screens/LoginScreen';
-
-const Stack = createStackNavigator();
+import AppNavigator from './navigation/AppNavigator';
 
 export default function App(props) {
   const isLoadingComplete = useCachedResources();
@@ -20,9 +16,7 @@ export default function App(props) {
       <View style={styles.container}>
         {Platform.OS === 'ios' && <StatusBar barStyle="dark-content" />}
         <NavigationContainer linking={LinkingConfiguration}>
-          <Stack.Navigator>
-            <Stack.Screen name="Login" component={LoginScreen} />
-          </Stack.Navigator>
+          <AppNavigator />
         </NavigationContainer>
       </View>
     );
