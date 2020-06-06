@@ -1,48 +1,60 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import * as React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
-import TabBarIcon from '../components/TabBarIcon';
+import TabBarIcon from './components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 
-const BottomTab = createBottomTabNavigator();
+const Stack1 = createStackNavigator();
+const Stack2 = createStackNavigator();
+
+const JestsStack = () => (
+    <Stack1.Navigator>
+        <Stack1.Screen name="Home" component={HomeScreen} />
+    </Stack1.Navigator>
+    );
+
+const ChatsStack = () => (
+    <Stack2.Navigator>
+        <Stack2.Screen name="Chats" component={LinksScreen} />
+    </Stack2.Navigator>
+);
+
+const BottomTab = createMaterialTopTabNavigator();
 const INITIAL_ROUTE_NAME = 'Home';
 
-export default function BottomTabNavigator({ navigation, route }) {
-  // Set the header title on the parent stack navigator depending on the
-  // currently active tab. Learn more in the documentation:
-  // https://reactnavigation.org/docs/en/screen-options-resolution.html
-  navigation.setOptions({ headerTitle: getHeaderTitle(route) });
-
+export default function BottomTabNavigator() {
   return (
-    <BottomTab.Navigator initialRouteName={INITIAL_ROUTE_NAME}>
+    <BottomTab.Navigator
+        initialRouteName={INITIAL_ROUTE_NAME}
+        tabBarPosition="bottom"
+        tabBarOptions={{
+            labelStyle: { fontSize: 12 },
+            showIcon: true,
+            style: { },
+        }}
+    >
       <BottomTab.Screen
-        name="Home"
-        component={HomeScreen}
+        name="Jests"
+        component={JestsStack}
         options={{
-          title: 'Get Started',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-code-working" />,
+          title: 'Jests',
+          tabBarIcon: ({ focused }) => (
+            <TabBarIcon focused={focused} name="md-code-working" />
+          ),
         }}
       />
       <BottomTab.Screen
-        name="Links"
-        component={LinksScreen}
+        name="Chats"
+        component={ChatsStack}
         options={{
-          title: 'Resources',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-book" />,
+          title: 'Chats',
+          tabBarIcon: ({ focused }) => (
+            <TabBarIcon focused={focused} name="md-book" />
+          ),
         }}
       />
     </BottomTab.Navigator>
   );
-}
-
-function getHeaderTitle(route) {
-  const routeName = route.state?.routes[route.state.index]?.name ?? INITIAL_ROUTE_NAME;
-
-  switch (routeName) {
-    case 'Home':
-      return 'How to get started';
-    case 'Links':
-      return 'Links to learn more';
-  }
 }

@@ -50,7 +50,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fafafa',
   },
   contentContainer: {
-    paddingTop: 15,
   },
   optionIconContainer: {
     marginRight: 12,
