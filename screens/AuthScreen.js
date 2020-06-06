@@ -1,7 +1,19 @@
 import * as React from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-export default function AuthScreen() {
+export default function AuthScreen({ navigation, route }) {
+  let authWithFacebook = async () => {
+
+  };
+
+  let authWithSnapchat = async () => {
+
+  };
+
+  let authWithGoogle = async () => {
+
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.imgContainer}>
@@ -11,10 +23,10 @@ export default function AuthScreen() {
         <TouchableOpacity style={[styles.loginButton, styles.signInWithFacebook]} onPress={() => {}}>
           <Text style={[styles.buttonText]}>Sign In With Apple</Text></TouchableOpacity>
         <TouchableOpacity style={[styles.loginButton, styles.signInWithSnapchat]} onPress={() => {}}>
-          <Text style={[styles.buttonText]}>Sign in with Snapchat</Text>
+          <Text style={[styles.buttonText, {color: '#000'}]}>Sign in with Snapchat</Text>
         </TouchableOpacity>
         <TouchableOpacity style={[styles.loginButton, styles.signInWithSMS]} onPress={() => {}}>
-          <Text style={[styles.buttonText]}>Sign in with SMS</Text>
+          <Text style={[styles.buttonText, {color: '#000'}]}>Sign in with SMS</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -23,7 +35,7 @@ export default function AuthScreen() {
 
 const styles = StyleSheet.create({
   buttonText: {
-    color: 'orange',
+    color: '#fff',
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center'
