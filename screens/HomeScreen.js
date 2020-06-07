@@ -1,53 +1,80 @@
-import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+  Alert,
+  Platform,
+  RefreshControl,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
-import { MonoText } from '../components/StyledText';
+import Layout from '../constants/Layout';
+
+const screenWidth = Layout.window.width;
+const cardWidthToHeightRatio = 1.6;
+const cardWidth = screenWidth / 2.4;
+const cardHeight = cardWidth * cardWidthToHeightRatio;
+const cardMargin = (screenWidth - 2 * cardWidth) / 3;
+
+export const Card = ({ id }) => {
+  return (
+    <TouchableOpacity onPress={() => Alert.alert(`open card ${id}`)}>
+      <View style={styles.card}>
+        <Text style={{ color: 'red' }}>Card {id}</Text>
+      </View>
+    </TouchableOpacity>
+  );
+};
+
+export const UserThumbnail = ({ id }) => {
+    return (
+        <TouchableOpacity onPress={() => Alert.alert(`tapped user ${id} ;)`)}>
+            <View style={styles.userThumbnail}>
+            </View>
+        </TouchableOpacity>
+    );
+};
+
+export const RecommendedMatchesSection = () => (
+    <View style={{width: screenWidth, borderRadius: 30, paddingVertical: cardMargin, backgroundColor: '#fff', marginBottom: cardMargin}}>
+        <Text style={{marginLeft: cardMargin, marginBottom: cardMargin, fontSize: 25, fontWeight: 'bold'}}>Recommended for You</Text>
+        <View style={{    flexDirection: 'row',
+            justifyContent: 'space-evenly',
+            alignItems: 'center'}}>
+            {Array(4)
+                .fill(null)
+                .map((i, idx) => <UserThumbnail key={idx} id={idx} />)}
+        </View>
+    </View>
+);
+
+export const JestsSection = () => (
+    <View style={{width: screenWidth, borderRadius: 30, paddingVertical: cardMargin, backgroundColor: '#fff', marginBottom: cardMargin}}>
+      <Text style={{marginLeft: cardMargin, marginBottom: cardMargin,  fontSize: 25, fontWeight: 'bold'}}>Jests</Text>
+      <View style={{    flexDirection: 'row',
+          flexWrap: 'wrap',
+          justifyContent: 'space-evenly',
+          alignItems: 'center'}}>
+        {Array(9)
+            .fill(null)
+            .map((i, idx) => <Card key={idx} id={idx} />)}
+      </View>
+    </View>
+);
+
 
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
-      <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-        <View style={styles.welcomeContainer}>
-          <Image
-            source={
-              __DEV__
-                ? require('../assets/images/robot-dev.png')
-                : require('../assets/images/robot-prod.png')
-            }
-            style={styles.welcomeImage}
-          />
-        </View>
-
-        <View style={styles.getStartedContainer}>
-          <DevelopmentModeNotice />
-
-          <Text style={styles.getStartedText}>Open up the code for this screen:</Text>
-
-          <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-            <MonoText>screens/HomeScreen.js</MonoText>
-          </View>
-
-          <Text style={styles.getStartedText}>
-            Change any of the text, save the file, and your app will automatically reload.
-          </Text>
-        </View>
-
-        <View style={styles.helpContainer}>
-          <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
-            <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
-          </TouchableOpacity>
-        </View>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={styles.contentContainer}
+      >
+        <RecommendedMatchesSection />
+        <JestsSection/>
       </ScrollView>
-
-      <View style={styles.tabBarInfoContainer}>
-        <Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>
-
-        <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-          <MonoText style={styles.codeHighlightText}>navigation/BottomTabNavigator.js</MonoText>
-        </View>
-      </View>
     </View>
   );
 }
@@ -56,55 +83,25 @@ HomeScreen.navigationOptions = {
   header: null,
 };
 
-function DevelopmentModeNotice() {
-  if (__DEV__) {
-    const learnMoreButton = (
-      <Text onPress={handleLearnMorePress} style={styles.helpLinkText}>
-        Learn more
-      </Text>
-    );
-
-    return (
-      <Text style={styles.developmentModeText}>
-        Development mode is enabled: your app will be slower but you can use useful development
-        tools. {learnMoreButton}
-      </Text>
-    );
-  } else {
-    return (
-      <Text style={styles.developmentModeText}>
-        You are not in development mode: your app will run at full speed.
-      </Text>
-    );
-  }
-}
-
-function handleLearnMorePress() {
-  WebBrowser.openBrowserAsync('https://docs.expo.io/versions/latest/workflow/development-mode/');
-}
-
-function handleHelpPress() {
-  WebBrowser.openBrowserAsync(
-    'https://docs.expo.io/versions/latest/get-started/create-a-new-app/#making-your-first-change'
-  );
-}
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#f7f8f9',
   },
-  developmentModeText: {
-    marginBottom: 20,
-    color: 'rgba(0,0,0,0.4)',
-    fontSize: 14,
-    lineHeight: 19,
-    textAlign: 'center',
+  card: {
+    backgroundColor: '#7dffb2',
+    width: cardWidth,
+    height: cardHeight,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 25,
+    marginBottom: cardMargin,
   },
   contentContainer: {
     paddingTop: 30,
   },
   welcomeContainer: {
+    backgroundColor: 'green',
     alignItems: 'center',
     marginTop: 10,
     marginBottom: 20,
@@ -162,18 +159,11 @@ const styles = StyleSheet.create({
     color: 'rgba(96,100,109, 1)',
     textAlign: 'center',
   },
-  navigationFilename: {
-    marginTop: 5,
-  },
-  helpContainer: {
-    marginTop: 15,
-    alignItems: 'center',
-  },
-  helpLink: {
-    paddingVertical: 15,
-  },
-  helpLinkText: {
-    fontSize: 14,
-    color: '#2e78b7',
-  },
+  userThumbnail: {
+    width: screenWidth / 5,
+    height: screenWidth / 5,
+      borderRadius: 50,
+      borderWidth: 5,
+      borderColor: '#945ce0'
+  }
 });

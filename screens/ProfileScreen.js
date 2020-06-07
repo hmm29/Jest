@@ -9,7 +9,7 @@ export default function ProfileScreen() {
     )
 }
 
-StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "dodgerblue",

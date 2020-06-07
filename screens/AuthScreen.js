@@ -2,18 +2,6 @@ import * as React from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function AuthScreen({ navigation, route }) {
-  let authWithFacebook = async () => {
-
-  };
-
-  let authWithSnapchat = async () => {
-
-  };
-
-  let authWithGoogle = async () => {
-
-  };
-
   return (
     <View style={styles.container}>
       <View style={styles.imgContainer}>
