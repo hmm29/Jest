@@ -7,7 +7,7 @@ import Swiper from 'react-native-swiper'
 import Layout from '../constants/Layout';
 const screenWidth = Layout.window.width;
 
-export default function ProfileScreen() {
+export default function MatchProfileScreen() {
   const [ isReady, setIsReady ] = useState(false);
 
     useEffect(() => {
@@ -15,7 +15,7 @@ export default function ProfileScreen() {
     }, []);
 
     return (
-      isReady ? <ScrollView showsVerticalScrollIndicator={false} style={{}} contentContainerStyle={styles.contentContainer}>
+      isReady ? <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.contentContainer}>
         <View style={styles.container}>
             <Swiper loop={false} height={screenWidth} paginationStyle={{position: 'relative'}}>
               <View>
@@ -35,22 +35,15 @@ export default function ProfileScreen() {
               <View style={styles.instagramPhotoGallery}>
 
               </View>
-              <View style={styles.personalityAnalysisButtonContainer}>
-                  <TouchableOpacity activeOpacity={0.6} onPress={() => {}} style={{backgroundColor: '#333', borderRadius: 50, justifyContent: 'center', alignItems: 'center', marginBottom: 20, padding: 15}}>
-                    <Text style={{color: '#fff', fontSize: 15, fontWeight: 'bold'}}>
-                      View Personality Analysis
-                    </Text>
-                  </TouchableOpacity>
-              </View>
 
               <View style={styles.ctasContainer}>
-                  <TouchableOpacity activeOpacity={0.6} onPress={() => {}} style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', backgroundColor: '#333', borderRadius: 50,  marginBottom: 20, padding: 15}}>
+                  <TouchableOpacity activeOpacity={0.6} onPress={() => {}} style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', backgroundColor: 'dodgerblue', borderRadius: 50,  marginBottom: 20, padding: 15}}>
                   <Text style={{marginRight: 15, fontSize: 20}}>💁</Text>
                     <Text style={{color: '#fff', fontSize: 15, fontWeight: 'bold'}}>
                       Take Sarah{'\''}s Personality Quiz
                     </Text>
                   </TouchableOpacity>
-                  <TouchableOpacity activeOpacity={0.6} onPress={() => {}} style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', backgroundColor: '#333', borderRadius: 50,  marginBottom: 20, padding: 15}}>
+                  <TouchableOpacity activeOpacity={0.6} onPress={() => {}} style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', backgroundColor: 'indigo', borderRadius: 50,  marginBottom: 20, padding: 15}}>
                   <Text style={{marginRight: 15, fontSize: 20}}>😜</Text>
                     <Text style={{color: '#fff', fontSize: 15, fontWeight: 'bold'}}>
                       Send Sarah a Jest

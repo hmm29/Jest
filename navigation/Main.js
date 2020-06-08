@@ -1,6 +1,6 @@
 import React from 'react';
 import { AsyncStorage } from 'react-native';
-import BottomTabNavigator from './BottomTabNavigator';
+import RootStackNavigator from './RootStackNavigator';
 
 console.disableYellowBox = true;
 
@@ -28,7 +28,7 @@ const Main = () => {
        getAuthSession();
     }, []);
 
-    return <BottomTabNavigator />
+    return <RootStackNavigator />
 };
 
 export default Main;
