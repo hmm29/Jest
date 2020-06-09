@@ -135,6 +135,27 @@ export const JestsSection = ({ navigation }) => {
   const [gifs, setGifs] = useState([]);
   const [term, updateTerm] = useState('too hot to handle');
 
+    const questions = [
+        {
+            question: "What is the fifth planet from the sun?",
+            answers: [
+                { id: "1", text: "Mars" },
+                { id: "2", text: "Jupiter", correct: true },
+                { id: "3", text: "Saturn" },
+                { id: "4", text: "Venus" }
+            ]
+        },
+        {
+            question: "How many planets are in the Solar System?",
+            answers: [
+                { id: "1", text: "6" },
+                { id: "2", text: "7" },
+                { id: "3", text: "8", correct: true },
+                { id: "4", text: "9" }
+            ]
+        }
+    ];
+
   useEffect(() => {
     // async function fetchGifs() {
     //   try {
@@ -180,8 +201,10 @@ export const JestsSection = ({ navigation }) => {
         alignItems: 'center',
       }}
     >
-      {gifs
-        .map((item, idx) => <Card key={idx} id={idx} onPress={() => navigation.navigate('JestActivity', { uri: item ? item.images.original.url : 'https://placeimg.com/480/640/nature'})} uri={item ? item.images.original.url : 'https://placeimg.com/480/640/nature'} />)}
+      {
+          // jests.map((jest, i) => <Card ... onPress={() => jest.type === 'quiz' ? navigation.navigate('JestQuiz') : navigation.navigate('JestGame') } />)
+          gifs
+        .map((item, idx) => <Card key={idx} id={idx} onPress={() => navigation.navigate('JestQuiz', { color: 'blue', questions, uri: item ? item.images.original.url : 'https://placeimg.com/480/640/nature'})} uri={item ? item.images.original.url : 'https://placeimg.com/480/640/nature'} />)}
     </View>
   </View>
 )};

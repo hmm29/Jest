@@ -7,7 +7,7 @@ import Swiper from 'react-native-swiper'
 import Layout from '../constants/Layout';
 const screenWidth = Layout.window.width;
 
-export default function JestActivityScreen() {
+export default function JestGameScreen({ navigation }) {
     return (
       <ScrollView showsVerticalScrollIndicator={false} style={{}} contentContainerStyle={styles.contentContainer}>
         <View style={styles.container}>
