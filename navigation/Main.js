@@ -8,7 +8,7 @@ const Main = () => {
 
     const fetchSession = async () => {
         // fetch session
-        const session = await AsyncStorage.getItem('@todo-graphql:session');
+        const session = await AsyncStorage.getItem('@jest-app:session');
         const sessionObj = JSON.parse(session);
         // const { token, id } = sessionObj;
 
@@ -18,7 +18,7 @@ const Main = () => {
     React.useEffect(() => {
         async function getAuthSession() {
             // fetch session
-            const session = await AsyncStorage.getItem('@todo-graphql:session');
+            const session = await AsyncStorage.getItem('@jest-app:session');
             const sessionObj = JSON.parse(session);
             // const { token, id } = sessionObj;
 

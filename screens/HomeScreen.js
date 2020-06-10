@@ -12,6 +12,7 @@ import {
   View,
 } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import { ThemeContext, themes } from '../contexts/ThemeContext';
 
 import TabBarIcon from '../navigation/components/TabBarIcon';
 import Layout from '../constants/Layout';
@@ -34,7 +35,9 @@ export const HoroscopeBannerCard = ({ navigation }) => {
   const [ horoscopeBannerCardVisible, setHoroscopeBannerCardVisible ] = useState(true);
 
   return (
-    horoscopeBannerCardVisible ? <>
+    horoscopeBannerCardVisible ?   <ThemeContext.Consumer>
+        {({ theme, setTheme }) =>
+        <>
     <View style={[styles.bannerCard, {backgroundColor: '#00bcd4'}]}>
       <View style={{flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center'}}>
         <View style={styles.bannerCardThumbnail}>
@@ -44,7 +47,10 @@ export const HoroscopeBannerCard = ({ navigation }) => {
             <Text style={{color: '#fff', fontWeight: 'bold'}}>Today - Wednesday, May 27</Text>
             <Text style={{color: '#fff', paddingTop: 3}}>Your Love Horoscope</Text>
           </View>
-          <TouchableOpacity onPress={() => navigation.navigate('Horoscope')}>
+          <TouchableOpacity onPress={() => {
+            setTheme(themes.dark);
+            navigation.navigate('Horoscope')
+          }}>
           <View style={{borderRadius: 30, backgroundColor: '#f7f8f9', paddingHorizontal: 10, paddingVertical: 5}}>
             <Text style={{fontWeight: 'bold'}}>Open</Text>
           </View>
@@ -60,7 +66,8 @@ export const HoroscopeBannerCard = ({ navigation }) => {
       <TabBarIcon focused={true} size={25} name="ios-close" />
     </View>
     </TouchableOpacity>
-    </> : null
+    </>}
+    </ThemeContext.Consumer> : null
   )
 }
 
@@ -174,6 +181,9 @@ export const JestsSection = ({ navigation }) => {
   }, [term])
 
   return (
+    <ThemeContext.Consumer>
+        {({ theme, setTheme }) =>
+        <>
   <View
     style={{
       width: screenWidth,
@@ -204,9 +214,13 @@ export const JestsSection = ({ navigation }) => {
       {
           // jests.map((jest, i) => <Card ... onPress={() => jest.type === 'quiz' ? navigation.navigate('JestQuiz') : navigation.navigate('JestGame') } />)
           gifs
-        .map((item, idx) => <Card key={idx} id={idx} onPress={() => navigation.navigate('JestQuiz', { color: 'blue', questions, uri: item ? item.images.original.url : 'https://placeimg.com/480/640/nature'})} uri={item ? item.images.original.url : 'https://placeimg.com/480/640/nature'} />)}
+        .map((item, idx) => <Card key={idx} id={idx} onPress={() => {
+          setTheme(themes.dark);
+          navigation.navigate('JestQuiz', { color: 'dodgerblue', questions, uri: item ? item.images.original.url : 'https://placeimg.com/480/640/nature'})
+        }} uri={item ? item.images.original.url : 'https://placeimg.com/480/640/nature'} />)}
     </View>
   </View>
+  </>}</ThemeContext.Consumer>
 )};
 
 export default function HomeScreen({ navigation, route }) {

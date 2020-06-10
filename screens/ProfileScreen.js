@@ -8,11 +8,7 @@ import Layout from '../constants/Layout';
 const screenWidth = Layout.window.width;
 
 export default function ProfileScreen() {
-  const [ isReady, setIsReady ] = useState(false);
-
-    useEffect(() => {
-      setTimeout(() => setIsReady(true), 200);
-    }, []);
+  const [ isReady, setIsReady ] = useState(true);
 
     return (
       isReady ? <ScrollView showsVerticalScrollIndicator={false} style={{}} contentContainerStyle={styles.contentContainer}>
@@ -47,13 +43,13 @@ export default function ProfileScreen() {
                   <TouchableOpacity activeOpacity={0.6} onPress={() => {}} style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', backgroundColor: '#333', borderRadius: 50,  marginBottom: 20, padding: 15}}>
                   <Text style={{marginRight: 15, fontSize: 20}}>💁</Text>
                     <Text style={{color: '#fff', fontSize: 15, fontWeight: 'bold'}}>
-                      Take Sarah{'\''}s Personality Quiz
+                      5 Do You Know Me Quiz Results
                     </Text>
                   </TouchableOpacity>
                   <TouchableOpacity activeOpacity={0.6} onPress={() => {}} style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', backgroundColor: '#333', borderRadius: 50,  marginBottom: 20, padding: 15}}>
                   <Text style={{marginRight: 15, fontSize: 20}}>😜</Text>
                     <Text style={{color: '#fff', fontSize: 15, fontWeight: 'bold'}}>
-                      Send Sarah a Jest
+                      10 First Impressions Quiz Results
                     </Text>
                   </TouchableOpacity>
               </View>

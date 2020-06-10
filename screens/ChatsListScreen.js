@@ -7,13 +7,17 @@ import Layout from '../constants/Layout';
 const screenWidth = Layout.window.width;
 
 export default function ChatsListScreen({ navigation, route }) {
+  const names = ['Jennifer', 'Lauren', 'Brittany'];
+
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+      {names.map((name, idx) =>
       <OptionButton
+        key={idx}
         icon="md-school"
-        label="Jennifer"
-        onPress={() => navigation.navigate('Chat', {})}
-      />
+        label={name}
+        onPress={() => navigation.navigate('Chat', {name})}
+      />)}
     </ScrollView>
   );
 }

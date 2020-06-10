@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+  Alert,
   Modal,
   Platform,
   StyleSheet,
@@ -14,6 +15,7 @@ import {
   useHeaderHeight,
 } from '@react-navigation/stack';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { ThemeContext, themes } from '../contexts/ThemeContext';
 
 import TabBarIcon from './components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
@@ -22,6 +24,7 @@ import JestGameScreen from '../screens/JestGameScreen';
 import JestQuizScreen from '../screens/JestQuizScreen';
 import MatchProfileScreen from '../screens/MatchProfileScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import SettingsScreen from '../screens/SettingsScreen';
 import ChatsListScreen from '../screens/ChatsListScreen';
 import ChatScreen from '../screens/ChatScreen';
 
@@ -121,13 +124,16 @@ const BottomTabNavigator = ({ navigation, route }) => {
   );
 };
 
-export default function App() {
+export default function RootStackNavigator() {
   const [modalVisible, setModalVisible] = useState(false);
 
   const forFade = ({ current, closing }) => ({
     cardStyle: {
       opacity: current.progress,
     },
+    overlayStyle: {
+      backgroundColor: '#000'
+    }
   });
 
   const config = {
@@ -140,13 +146,15 @@ export default function App() {
   const config2 = {
     animation: 'timing',
     config: {
-      duration: 200,
+      duration: 180,
     },
   };
 
   return (
+    <ThemeContext.Consumer>
+        {({ theme, setTheme }) =>
     <>
-      <Modal
+    <Modal
         animationType="slide"
         transparent={true}
         visible={modalVisible}
@@ -206,10 +214,10 @@ export default function App() {
             headerTransparent: true,
             gestureEnabled: false,
             transitionSpec: {
-              open: config,
-              close: config,
+              open: config2,
+              close: config2,
             },
-            cardStyleInterpolator: forFade,
+            cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
             headerStyle: { height: 80 },
             headerTitle: () => null,
             headerLeft: () => (
@@ -229,9 +237,40 @@ export default function App() {
                   styles.headerButton,
                   { backgroundColor: 'transparent' },
                 ]}
-                onPress={() => alert('This is the invite!')}
+                onPress={() => navigation.push('Settings')}
               >
                 <TabBarIcon size={25} name="md-settings" />
+              </TouchableOpacity>
+            ),
+          })}
+        />
+        <Stack.Screen
+          name="Settings"
+          component={SettingsScreen}
+          options={({ navigation, route }) => ({
+            headerTransparent: true,
+            headerStyle: { height: 80 },
+            headerTitle: () => null,
+            headerLeft: () => (
+              <TouchableOpacity
+                style={[
+                  styles.headerButton,
+                  { backgroundColor: 'transparent' },
+                ]}
+                onPress={() => navigation.goBack()}
+              >
+                <TabBarIcon size={25} name="ios-arrow-back" />
+              </TouchableOpacity>
+            ),
+            headerRight: () => (
+              <TouchableOpacity
+                style={[
+                  styles.headerButton,
+                  { backgroundColor: 'transparent' },
+                ]}
+                onPress={() => Alert.alert('tbd')}
+              >
+                <TabBarIcon size={25} name="ios-more" />
               </TouchableOpacity>
             ),
           })}
@@ -257,7 +296,7 @@ export default function App() {
                 ]}
                 onPress={() => navigation.goBack()}
               >
-                <TabBarIcon size={25} name="ios-close" />
+                <TabBarIcon name="ios-close" />
               </TouchableOpacity>
             ),
           })}
@@ -282,7 +321,7 @@ export default function App() {
                 ]}
                 onPress={() => navigation.goBack()}
               >
-                <TabBarIcon size={25} name="ios-close" />
+                <TabBarIcon name="ios-close" />
               </TouchableOpacity>
             ),
           })}
@@ -293,8 +332,8 @@ export default function App() {
               options={({ navigation, route }) => ({
                   headerTransparent: true,
                   transitionSpec: {
-                      open: config2,
-                      close: config2,
+                      open: config,
+                      close: config,
                   },
                   cardStyleInterpolator: forFade,
                   headerStyle: { height: 80 },
@@ -305,9 +344,12 @@ export default function App() {
                               styles.headerButton,
                               { backgroundColor: 'transparent' },
                           ]}
-                          onPress={() => navigation.goBack()}
+                          onPress={() => {
+                            setTheme(themes.default);
+                            navigation.goBack();
+                          }}
                       >
-                          <TabBarIcon size={25} name="ios-close" />
+                          <TabBarIcon name="ios-close" />
                       </TouchableOpacity>
                   ),
               })}
@@ -360,15 +402,19 @@ export default function App() {
                   styles.headerButton,
                   { backgroundColor: 'transparent' },
                 ]}
-                onPress={() => navigation.goBack()}
+                onPress={() => {
+                  setTheme(themes.default);
+                  navigation.goBack();
+                }}
               >
-                <TabBarIcon size={25} name="ios-close" />
+                <TabBarIcon name="ios-close" />
               </TouchableOpacity>
             ),
           })}
         />
       </Stack.Navigator>
-    </>
+      </>
+    }</ThemeContext.Consumer>
   );
 }
 
