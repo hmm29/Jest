@@ -1,47 +1,58 @@
 import * as React from 'react';
-import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, Platform, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ThemeContext, themes } from '../contexts/ThemeContext';
 
 import { ScrollView } from 'react-native-gesture-handler';
 import Swiper from 'react-native-swiper'
+import TicTacToe from './components/games/TicTacToe';
 
 import Layout from '../constants/Layout';
 const screenWidth = Layout.window.width;
 
-export default function JestGameScreen({ navigation }) {
-    return (
-      <ScrollView showsVerticalScrollIndicator={false} style={{}} contentContainerStyle={styles.contentContainer}>
-        <View style={styles.container}>
-            <Swiper loop={false} height={screenWidth} paginationStyle={{position: 'relative'}}>
-              <View>
-              <Image source={{ uri: 'https://placeimg.com/640/640/nature'}} style={{width: screenWidth, height: screenWidth}}/>
-              </View>
-            </Swiper>
-
-            </View>
-        </ScrollView>
-    )
+export default function JestGameScreen({ route, navigation }) {
+  return (
+    <ThemeContext.Consumer>
+        {({ theme, setTheme }) =>
+    <View
+      style={styles.container}
+    >
+    <StatusBar barStyle="light-content" />
+      <View style={[styles.card, { backgroundColor: route.params.color }]}>
+      <View style={styles.cardContent}>
+        <TicTacToe navigation={navigation} />
+      </View>
+      </View>
+    </View>}
+    </ThemeContext.Consumer>
+  );
 }
 
 const styles = StyleSheet.create({
-    contentContainer: {
-        flex: 1,
-        backgroundColor: 'orange'
-    },
-    ctasContainer: {
-      flex: 1,
-      flexDirection: "column",
-            justifyContent: 'space-evenly'
-    },
-    instagramPhotoGallery: {
-        backgroundColor: 'pink'
-    },
-    userBasicInfo: {
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'flex-start',
-    },
-    userInfoContainer: {
-      padding: screenWidth / 20,
-      flex: 1,
-    }
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: themes.dark.background,
+    padding: 10
+  },
+  card: {
+    flex: 1,
+    alignSelf: 'stretch',
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  cardContent: {
+    flex: 1,
+    alignSelf: 'stretch',
+    justifyContent: 'space-between',
+    padding: 20
+  },
+  text: {
+    color: '#fff',
+    fontSize: 25,
+    textAlign: 'center',
+    letterSpacing: -0.02,
+    fontWeight: '600',
+  }
 });
