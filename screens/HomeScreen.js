@@ -216,7 +216,8 @@ export const JestsSection = ({ navigation }) => {
           gifs
         .map((item, idx) => <Card key={idx} id={idx} onPress={() => {
           setTheme(themes.dark);
-          navigation.navigate('JestQuiz', { color: 'dodgerblue', questions, uri: item ? item.images.original.url : 'https://placeimg.com/480/640/nature'})
+          // navigation.navigate('JestQuiz', { color: 'dodgerblue', questions, uri: item ? item.images.original.url : 'https://placeimg.com/480/640/nature'});
+          navigation.navigate('JestGame', { color: 'dodgerblue', uri: item ? item.images.original.url : 'https://placeimg.com/480/640/nature'})
         }} uri={item ? item.images.original.url : 'https://placeimg.com/480/640/nature'} />)}
     </View>
   </View>

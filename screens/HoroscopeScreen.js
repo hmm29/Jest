@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
   },
   horoscopeText: {
     color: '#fff',
+    fontSize: 30,
     fontWeight: 'bold'
   }
 })

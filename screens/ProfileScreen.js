@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-
-import { ScrollView } from 'react-native-gesture-handler';
-import Swiper from 'react-native-swiper'
+import {
+  useHeaderHeight,
+} from '@react-navigation/stack';
 
 import Layout from '../constants/Layout';
 const screenWidth = Layout.window.width;
@@ -11,16 +11,9 @@ export default function ProfileScreen() {
   const [ isReady, setIsReady ] = useState(true);
 
     return (
-      isReady ? <ScrollView showsVerticalScrollIndicator={false} style={{}} contentContainerStyle={styles.contentContainer}>
-        <View style={styles.container}>
-            <Swiper loop={false} height={screenWidth} paginationStyle={{position: 'relative'}}>
-              <View>
-              <Image source={{ uri: 'https://placeimg.com/640/640/people'}} style={{width: screenWidth, height: screenWidth}}/>
-              </View>
-              <View>
-              <Image source={{ uri: 'https://placeimg.com/640/640/people'}} style={{width: screenWidth, height: screenWidth}}/>
-              </View>
-            </Swiper>
+      isReady ?
+        <View style={[styles.container, {paddingTop: useHeaderHeight()}]}>
+            <Image source={{ uri: 'https://placeimg.com/640/640/people'}} style={{width: screenWidth / 2, height: screenWidth / 2, borderRadius: screenWidth / 4}}/>
             <View style={styles.userInfoContainer}>
               <View style={styles.userBasicInfo}>
                 <Text>Name</Text>
@@ -40,13 +33,13 @@ export default function ProfileScreen() {
               </View>
 
               <View style={styles.ctasContainer}>
-                  <TouchableOpacity activeOpacity={0.6} onPress={() => {}} style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', backgroundColor: '#333', borderRadius: 50,  marginBottom: 20, padding: 15}}>
+                  <TouchableOpacity activeOpacity={0.6} onPress={() => {}} style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', backgroundColor: 'aquamarine', borderRadius: 50,  marginBottom: 20, padding: 15}}>
                   <Text style={{marginRight: 15, fontSize: 20}}>💁</Text>
                     <Text style={{color: '#fff', fontSize: 15, fontWeight: 'bold'}}>
                       5 Do You Know Me Quiz Results
                     </Text>
                   </TouchableOpacity>
-                  <TouchableOpacity activeOpacity={0.6} onPress={() => {}} style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', backgroundColor: '#333', borderRadius: 50,  marginBottom: 20, padding: 15}}>
+                  <TouchableOpacity activeOpacity={0.6} onPress={() => {}} style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', backgroundColor: 'navy', borderRadius: 50,  marginBottom: 20, padding: 15}}>
                   <Text style={{marginRight: 15, fontSize: 20}}>😜</Text>
                     <Text style={{color: '#fff', fontSize: 15, fontWeight: 'bold'}}>
                       10 First Impressions Quiz Results
@@ -58,16 +51,16 @@ export default function ProfileScreen() {
 
             </View>
         </View>
-        </ScrollView> : null
+     : null
     )
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#fff",
+        backgroundColor: "lightblue",
         justifyContent: "flex-start",
-        alignItems: "stretch"
+        alignItems: "center",
     },
     ctasContainer: {
       flex: 1,

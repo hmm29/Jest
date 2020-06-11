@@ -282,6 +282,31 @@ export default function RootStackNavigator() {
             headerTransparent: true,
             gestureEnabled: false,
             transitionSpec: {
+              open: config2,
+              close: config2,
+            },
+            cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
+            headerStyle: { height: 80 },
+            headerTitle: () => null,
+            headerLeft: () => (
+              <TouchableOpacity
+                style={[
+                  styles.headerButton,
+                  { backgroundColor: 'transparent' },
+                ]}
+                onPress={() => navigation.goBack()}
+              >
+                <TabBarIcon name="ios-arrow-down" />
+              </TouchableOpacity>
+            ),
+          })}
+        />
+        <Stack.Screen
+          name="JestGame"
+          component={JestGameScreen}
+          options={({ navigation, route }) => ({
+            headerTransparent: true,
+            transitionSpec: {
               open: config,
               close: config,
             },
@@ -294,32 +319,10 @@ export default function RootStackNavigator() {
                   styles.headerButton,
                   { backgroundColor: 'transparent' },
                 ]}
-                onPress={() => navigation.goBack()}
-              >
-                <TabBarIcon name="ios-close" />
-              </TouchableOpacity>
-            ),
-          })}
-        />
-        <Stack.Screen
-          name="JestGame"
-          component={JestGameScreen}
-          options={({ navigation, route }) => ({
-            headerTransparent: true,
-            transitionSpec: {
-              open: config2,
-              close: config2,
-            },
-            cardStyleInterpolator: forFade,
-            headerStyle: { height: 80 },
-            headerTitle: () => null,
-            headerLeft: () => (
-              <TouchableOpacity
-                style={[
-                  styles.headerButton,
-                  { backgroundColor: 'transparent' },
-                ]}
-                onPress={() => navigation.goBack()}
+                onPress={() => {
+                  setTheme(themes.default);
+                  navigation.goBack();
+                }}
               >
                 <TabBarIcon name="ios-close" />
               </TouchableOpacity>
@@ -407,7 +410,7 @@ export default function RootStackNavigator() {
                   navigation.goBack();
                 }}
               >
-                <TabBarIcon name="ios-close" />
+                <TabBarIcon color="#fff" name="ios-close" />
               </TouchableOpacity>
             ),
           })}

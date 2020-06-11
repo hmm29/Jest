@@ -4,12 +4,16 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 export default function AuthScreen({ navigation, route }) {
   return (
     <View style={styles.container}>
-      <View style={styles.imgContainer}>
-        <Image style={styles.previewImage} source={{ uri: ''}} />
+      <View style={[styles.imgContainer, {
+          transform: [
+              { rotate: "10deg" }
+          ]
+      }]}>
+        <Image style={styles.previewImage} source={require('../assets/images/splash.png')} />
       </View>
       <View style={styles.signInButtonsContainer}>
         <TouchableOpacity style={[styles.loginButton, styles.signInWithFacebook]} onPress={() => {}}>
-          <Text style={[styles.buttonText]}>Sign In With Apple</Text></TouchableOpacity>
+          <Text style={[styles.buttonText]}>Sign In With Facebook</Text></TouchableOpacity>
         <TouchableOpacity style={[styles.loginButton, styles.signInWithSnapchat]} onPress={() => {}}>
           <Text style={[styles.buttonText, {color: '#000'}]}>Sign in with Snapchat</Text>
         </TouchableOpacity>
@@ -50,6 +54,12 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     justifyContent: 'center'
   },
+   previewImage: {
+    flex: 1,
+    borderRadius: 20,
+    resizeMode: 'cover',
+       width: '100%'
+   },
   signInWithSMS: {
     backgroundColor: '#fff',
   },

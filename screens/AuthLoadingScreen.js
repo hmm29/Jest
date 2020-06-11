@@ -17,7 +17,7 @@ const AuthLoadingScreen = ({ navigation }) =>  {
     // auth init function
     let _bootstrapAsync = async () => {
         // Fetch token from storage
-        let session = await AsyncStorage.getItem('@todo-graphql:session');
+        let session = await AsyncStorage.getItem('@jest-app:session');
         // If session exists, validate it, else redirect to login screen
         if (session) {
             let sessionObj = JSON.parse(session);

@@ -12,7 +12,7 @@ export default function ChatsListScreen({ navigation, route }) {
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
       {names.map((name, idx) =>
-      <OptionButton
+      <ChatListItem
         key={idx}
         icon="md-school"
         label={name}
@@ -22,7 +22,7 @@ export default function ChatsListScreen({ navigation, route }) {
   );
 }
 
-function OptionButton({ icon, label, onPress, isLastOption }) {
+function ChatListItem({ icon, label, onPress, isLastOption }) {
   return (
     <RectButton style={[styles.option, isLastOption && styles.lastOption]} onPress={onPress}>
       <View style={{ flexDirection: 'row' }}>
